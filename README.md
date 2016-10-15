@@ -24,15 +24,91 @@
 ---
 
 ## Programming Language
-- Javascript
-    - Script 언어이므로 interpreter에 의해 실행된다.
-    - Object 기반의 언어이며 Single Thread이다.
-    
+### Javascript
+- Script 언어이므로 interpreter에 의해 실행된다.
+- Object 기반의 언어이며 Single Thread이다.
+#### Method Chaining이란, 어떻게 구현할지
 
+
+#### Node.js Single Thread 처리 방식, 장점, 어떤 경우에 안좋고 어떨때 좋은지
+
+
+
+### C++
+#### C++ Virtual Function
+- 가상 메소드는 그 메소드를 호출하는 객체가 어떤 클래스인지에 따라 구현이 결정되는 메소드를 뜻한다.
+- 자바의 경우, 정적 메소드를 제외한 모든 함수가 가상 메소드이며, C++의 경우 virtual 키워드를 선언해야 한다.
+- 예부터 살펴보자.
+
+```C++
+class Parent {
+    public:
+        void say(){ std::cout << "parent's say" << endl; }
+};
+
+class Child : public Parent {
+    public:
+        void say(){ std::cout << "child's say" << endl; }
+};
+
+int main()
+{
+    Child* a = new Child();
+    a->say();   // child's say 출력
+
+    Parent *b = new Child();
+    b->say();   // parent's say 출력
+
+    return 0;
+}
+```
+
+- 위에서 Parent 클래스의 포인터를 사용했지만, 실제 객체는 Child의 Instance 임에도 불구하고, Parent's say가 출력된다.
+
+- 하지만 아래와 같이 virtual을 사용하는 경우
+
+```C++
+class Parent {
+    public:
+        virtual void say(){ std::cout << "parent's say" << endl; }
+};
+
+class Child : public Parent {
+    public:
+        void say(){ std::cout << "child's say" << endl; }
+};
+
+int main()
+{
+    Parent* a = new Child();
+    a->say();   // child's say 출력
+
+    return 0;
+}
+```
+
+- child's say가 출력이 된다. virtual 키워드를 선언함으로써, Pointer의 타입이 아닌 Instance의 Type을 인지하여 호출한다.
+- 바로 virtual이 이런 dynamic binding(late binding)이 가능하게 해주는 keyword이기 때문이다. 포인터의 타입이 아닌 실제 객체의 타입을 알아서 virtual function table을 찾아 동적으로 호출하는 것이다.
+- 반면, virtual이 없는 함수들은 compile time binding이다. 이미 무엇을 호출할지 정해져 있다.
+- Virtual class도 마찬가지다. pointer에 상관 없이 dynamic binding 이기 때문에 instance의 type에 맞는 method를 접근할 수 있게 된다.
+
+
+
+
+#### 소멸자에 virtual을 쓰는 이유
+- A클래스가 부모클래스, B클래스가 자식클래스 일때, 생성자의 호출 순서는 A::A(), B::B() 순서로 호출된다. 소멸자의 경우, 생성자의 반대 순서로 B::~B(), A::~A() 순서다.
+- 다형성 이용을 위해 A클래스의 포인터로부터 B클래스를 호출할 때, 가상 함수로 정의되지 않은 B클래스의 오버라이딩된 함수를 호출하면 A클래스의 멤버 함수가 호출된다.
+- 소멸자도 B클래스에서 오버라이딩된 함수라고 볼 수 있기 때문에 만약 A포인터로 객체를 삭제하면 A클래스의 소멸자가 호출된다. 따라서 소멸자를 가상 함수로 선언하지 않으면 이 경우 B클래스의 소멸자는 결코 호출되지 않는다.
+- 가상 함수 키워드 virtual이 사용되었다면 이것은 B클래스에서 재정의될 수 있음을 명시하기 때문에 포인터의 종류에 상관없이 항상 B클래스의 메서드가 호출된다.
+- 즉, 자식 클래스의 소멸자가 호출되고 나서 부모 클래스의 소멸자가 호출된다. 따라서 상속 관계가 있고 소멸자에서 리소스를 해제해야 하는 경우 반드시 소멸자를 가상 함수로 선언해야 한다.
+- Ref: [C++/소멸자에 virtual을 쓰는 이유](http://hyacinth.byus.net/moniwiki/wiki.php/C%2B%2B/%EC%86%8C%EB%A9%B8%EC%9E%90%EC%97%90%20virtual%EC%9D%84%20%EC%93%B0%EB%8A%94%20%EC%9D%B4%EC%9C%A0)
 
 ---
 
 ## Database
+### 정규화란?
+
+### MongoDB 구조, 장점
 
 
 ---
