@@ -191,9 +191,9 @@ int main()
 - Ref: [http://swalloow.tistory.com/77](http://swalloow.tistory.com/77)
 
 ### TCP/IP 
-Server: socket() -> bind() -> listen() -> accept() -> read()/write() -> close()
-				                             ↑
-Client: socket() ----------------------> connect() -> read()/write() -> close()
+- Server: socket() -> bind() -> listen() -> accept() -> read()/write() -> close()
+- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑
+- Client: socket() ----------------------> connect() -> read()/write() -> close()
 
 
 ---
