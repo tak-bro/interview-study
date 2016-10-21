@@ -24,9 +24,11 @@
 ---
 
 ## Programming Language
+
 ### Javascript
 - Script 언어이므로 interpreter에 의해 실행된다.
 - Object 기반의 언어이며 Single Thread이다.
+
 #### Method Chaining이란, 어떻게 구현할지
 
 
@@ -35,6 +37,7 @@
 
 
 ### C++
+
 #### C++ Virtual Function
 - 가상 메소드는 그 메소드를 호출하는 객체가 어떤 클래스인지에 따라 구현이 결정되는 메소드를 뜻한다.
 - 자바의 경우, 정적 메소드를 제외한 모든 함수가 가상 메소드이며, C++의 경우 virtual 키워드를 선언해야 한다.
@@ -96,6 +99,7 @@ int main()
 
 
 #### 소멸자에 virtual을 쓰는 이유
+
 - A클래스가 부모클래스, B클래스가 자식클래스 일때, 생성자의 호출 순서는 A::A(), B::B() 순서로 호출된다. 소멸자의 경우, 생성자의 반대 순서로 B::~B(), A::~A() 순서다.
 - 다형성 이용을 위해 A클래스의 포인터로부터 B클래스를 호출할 때, 가상 함수로 정의되지 않은 B클래스의 오버라이딩된 함수를 호출하면 A클래스의 멤버 함수가 호출된다.
 - 소멸자도 B클래스에서 오버라이딩된 함수라고 볼 수 있기 때문에 만약 A포인터로 객체를 삭제하면 A클래스의 소멸자가 호출된다. 따라서 소멸자를 가상 함수로 선언하지 않으면 이 경우 B클래스의 소멸자는 결코 호출되지 않는다.
@@ -103,6 +107,66 @@ int main()
 - 즉, 자식 클래스의 소멸자가 호출되고 나서 부모 클래스의 소멸자가 호출된다. 따라서 상속 관계가 있고 소멸자에서 리소스를 해제해야 하는 경우 반드시 소멸자를 가상 함수로 선언해야 한다.
 - Ref: [C++/소멸자에 virtual을 쓰는 이유](http://hyacinth.byus.net/moniwiki/wiki.php/C%2B%2B/%EC%86%8C%EB%A9%B8%EC%9E%90%EC%97%90%20virtual%EC%9D%84%20%EC%93%B0%EB%8A%94%20%EC%9D%B4%EC%9C%A0)
 
+#### C++ static
+- 전역변수에 선언된 static
+    - 선언된 파일 내에서만 참조를 허용하겠다는 의미
+- 함수 내에 선언된 static의 의미
+    - 한번만 초기화되고, 지역변수와 달리 함수를 빠져나가도 소멸되지 않는다.
+- 초기값을 주지 않을 경우 항상 0 으로 초기화 되며 프로그램을 실행시킬 때 단 한번만 초기화된다. 
+- static 멤버변수(클래스 변수)
+    - static 멤버변수는 '클래스 변수'라고도 불린다. 일반적인 멤버변수와 달리 클래스당 하나씩만 생성되기 때문이다. 클래스 안에 선언된 static 변수의 경우 별개의 메모리에 할당되는 변수가 아닌 모든 객체가 공유하는 구조가 된다.
+    - static 멤버변수는 생성자에서 초기화하면 안된다. static 멤버변수는 객체가 생성될때 동시에 생성되는 변수가 아니고, 이미 메모리공간에 할당이 이뤄진 변수이기 때문이다. 따라서 static 멤버변수의 초기화 문법은 다음과 같이 별도로 정의되어 있다.
+    ```C++
+        int student::objCnt; // static 멤버변수의 초기화 문법
+    ```
+- static 멤버함수
+    - static 멤버함수 역시 그 특성이 static 멤버변수와 동일하다.
+    - 선언된 클래스의 모든 객체가 공유한다.
+    - public으로 선언이 되면, 클래스의 이름을 이용해서 호출이 가능하다.
+    - 의 멤버로 존재하는 것이 아니다.
+
+#### C++ 자료형(32bit)
+
+| 구분   | 자료형        | 크기    |
+|--------|---------------|---------|
+| 문자형 | char          | 1 byte  |
+|        | unsigned char | 1 byte  |
+| 정수형 | int           | 4 byte  |
+|        | unsigned int  | 4 byte  |
+|        | short         | 2 byte  |
+|        | long          | 4 byte  |
+|        | unsigned long | 4 byte  |
+| 실수형 | float         | 4 bytte |
+|        | double        | 8 byte  |
+
+
+
+### Java
+
+#### Java static 
+- static 변수(즉 정적변수)란  
+    - Class 당 하나만 생성되는 변수, 객체(인스턴스)를 아무리 많이 만들더라도 변수는 하나만 존재 
+    - 객체가 생성될 때마다 새롭게 생성되는 멤버 변수와는 달리 초기에 한번만 생성되고 공유하여 사용가능 
+- static 변수 생성 시기
+    - Class 이름이 언급되어 질때 생성 (new 뿐만 아니라 Class 명만 나와도 생성됨)
+- static 변수 초기화 방법 
+    - static 변수 는 초기 생성시 초기화 
+    
+    ```java
+    public static int sTotal=0;
+    ```
+
+    - static 변수 는 초기 생성시 초기화. 최초 1회만 호출됨. 
+    
+    ```java
+        public static int sTotal=0; 
+        public int nTotal=0; 
+        static { 
+            sTotal += 10; 
+            //nTotal += 10; //Static initializer 사용시 사용할 수 없다는 메시지 발생 
+        } 
+    ```
+    
 ---
 
 ## Database
@@ -125,6 +189,12 @@ int main()
     - 데이터 전송에 대한 보장을 하지 않기 때문에 패킷 손실이 발생할 수 있다. 이러한 특징 때문에 DNS, 멀티미디어에서 사용된다.
     - TCP와 같이 UDP도 헤더에 있는 Checksum 필드를 통해 최소한의 오류는 검출한다.
 - Ref: [http://swalloow.tistory.com/77](http://swalloow.tistory.com/77)
+
+### TCP/IP 
+Server: socket() -> bind() -> listen() -> accept() -> read()/write() -> close()
+				                             ↑
+Client: socket() ----------------------> connect() -> read()/write() -> close()
+
 
 ---
 
