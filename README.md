@@ -171,9 +171,34 @@ int main()
 
 ## Database
 ### 정규화란?
+- 관계형 데이터베이스의 설계에서 중복을 최소화하게 데이터를 구조화하는 프로세스를 정규화라고 한다. 
+- 데이터베이스 정규화의 목표는 이상이 있는 관계를 재구성하여 작고 잘 조직된 관계를 생성하는 것에 있다. 일반적으로 정규화란 크고, 제대로 조직되지 않은 테이블들과 관계들을 작고 잘 조직된 테이블과 관계들로 나누는 것을 포함한다. 정규화의 목적은 하나의 테이블에서의 데이터의 삽입, 삭제, 변경이 정의된 관계들로 인하여 데이터베이스의 나머지 부분들로 전파되게 하는 것이다.
+- Ref: [데이터베이스_정규화](https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4_%EC%A0%95%EA%B7%9C%ED%99%94)
 
-### MongoDB 구조, 장점
+### MongoDB
+- MongoDB의 특징 
+    - Flexibility: Schema-less 구조를 취함으로써 다양한 형태로 데이터를 저장 할 수 있다.
+    - Performance: Read&Write 성능이 뛰어나다
+    - Scalability: RDBMS의 한계로 잘 알려진 데이터 수용량을 확대 하고자 Scale Out 구조를 채택 함으로 인해 많은 데이터를 저장 할 수 있다.
+    
+- MongoDB의 장점
+    - Schema-less(Document Based): 데이터 모델의 유연한 변화가 가능하다. 데이터 모델에 대한 변경,추가 필드 확장이  간단하다. 그러나 RDBMS의 경우 스키마 변경에 따른 추가 작업이 필요 하다.
+    - Structure of a single object is clearer: 가독성 측면에서 볼 때, json 구조를 사용하기 때문에 RDBMS 테이블 구조에 비해 데이터를 직관적으로 파악 할 수 있다.
+    - No sql or hibernate queries (complex joins): MongoDB의 장점 중 하나는 사용하기 쉽다는 점다. 비교적 간단한 형태로 기존의 RDBMS의 SQL언어를 대체 할 수 있다. (i,e, $gt, $lt, )
+    - Tuning: consistency의 레벨이 컨트롤 가능 하기 때문에 성능에 중점을 두거나 또는 정합성에 중점을 둘지 선택 가능하다.
+    - Ease of scale-out: Auto sharding을 지원 함으로서 장비 확장이 RDBMS 대비 간단하다.
 
+- MongoDB의 단점
+    - 만약 데이터 업데이트 중 장애가 발생한다면 데이터 손실이 발생할 수 있다. 따라서 중요데이터는 가급적 분리 보관을 추천한다.
+    - 데이터의 복제 기능을 지원 하기는 하나 완전한 원복을 원한다면 데이터 센터를 분리해서 설치 해야 한다.
+    - 인덱스 구조는 메모리에 저장 되기 때문에 많은 인덱스를 사용한다면 충분한 메모리를 사용하기 바란다.
+    - 데이터는 필드네임과 함께 사용해야 함으로 데이터 공간 소모가 RDBMS 대비 많을 가능성이 있다.
+    - 복잡한 join 사용시 성능 제약이 있다.Document Based 구조 임으로 가급적 join을 회피하는 구조로 사용해야 한다.  
+
+- Summary
+    - 데이터 전반적인 가이드의 결론은 많은 양의 데이터와 쓰기 읽기등 퍼포먼스에 치중한다면 MongoDB를, transaction과 같은 정합성 위주의 시스템을 사용한다면 RDBMS를 사용하기를 추천한다.
+
+- Ref: (NoSQL – MongoDB를 RDBMS의 대안으로 고민 중이라면 참고할 만한 글)[hochul.net/blog/nosql_mongodb_rdbms_alternative]
 
 ---
 
