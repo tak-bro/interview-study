@@ -10,6 +10,7 @@
 - [Database](#database)
 - [Network](#network)
 - [Operating System](#operating-system)
+- [Web](#web)
 
 ---
 
@@ -34,6 +35,7 @@
 ### Node.js
 - Chrome Javascript Engine V8 기반의 플랫폼
  - V8은 Google에 의해서 C++로 개발된 오픈 소스 자바스크립트 엔진
+   - V8은 자바스크립트 코드를 인터프리터로 통역(interpret)하거나 중간 언어로 번역(compile)하는 기존의 방법 대신 각 코드를 실행하기 전 각 플랫폼에 최적화된 기계어로 번역하고 이를 캐시에 보관해 재사용한다. 그리고 외부로 드러나지는 않지만 가능한 경우 자바스크립트가 가진 동적 언어로서의 특징과 상반되는 형식 기반 멤버 바인딩을 내부적으로 사용한다.
  - JavaScript를 compile하여 native machine code 변경 후 runtime시 다시 최적화하여 실행하는 구조.
  - Garbage Collection을 통한 메모리의 효율적인 관리. ( memory leak는 개선의 여지가 있음 )
  - Standalone 고성능 JavaScript 엔진으로 사용가능. 
@@ -41,17 +43,22 @@
 - Single Thread 기반의 Non-Blocking I/O model 사용
  - 노드를 사용하는 가장 중요한 이유중 하나는 비동기형 방식이다.
  - 우선 Multi thread이란?
-  - ![Multi-thread](https://cloud.githubusercontent.com/assets/7614353/20128452/78c51038-a68b-11e6-8b26-3ff418da0bf2.png)
+ ![Multi-thread](https://cloud.githubusercontent.com/assets/7614353/20128452/78c51038-a68b-11e6-8b26-3ff418da0bf2.png)
   - 동시에 Service할 수 있는 Client의 수는 Thread Pool안에 있는 가용한 Thread의 수와 동일
   - 일반적으로 Thread Pool안의 Thread는 500~2000. ( 2000을 넘는 경우는 거의 없다. )
   - 할당된 Thread가 IO작업( Network, File, DB )을 하게 되면 blocking 방식으로 처리되어 해당 Thread가 CPU를 사용하지 않는 상태(wait 상태)로 변환.
   - 즉, IO시간만큼 Thread는 blocking.
 
 - Node.js 는 Single Thread로 구성되어 있다. 내부적으로는 Thread Pool 로 구성되어 있다.
- - ![Non-Blocking I/O Model](https://cloud.githubusercontent.com/assets/7614353/20128262/3c0656c6-a68a-11e6-91d9-d11ad67cafb8.png)
+ ![Non-Blocking I/O Model](https://cloud.githubusercontent.com/assets/7614353/20128262/3c0656c6-a68a-11e6-91d9-d11ad67cafb8.png)
+ - 다양한 요인들이 결합된 데이터에 대한 통계적 분석 연산의 경우 다중 스레드 모델이 더 적합하다. 필요한 구간에 여러 개의 스레드를 배치해 시스템 자원을 최대한 활용하여 빠르게 연산을 완료하도록 설계할 수 있다. 
+ - 하지만 이와 같은 상황을 모든 프로그램이 맞닥뜨리는 것은 아니다. 요청에 대한 빠른 반응을 요구하는 네트워크 서버의 프로그램의 경우 단일 스레드 모델이 더 적합할 수도 있다. 하나의 스레드만 이용하는 방식은 다음과 같은 장점이 있다.
+   - 자원 접근에 대한 동기화를 신경 쓰지 않아도 된다. 여러 개의 스레드가 공유된 자원을 사용할 경우 각 스레드가 원하는 결과를 얻게 하려면 공용 자원에 대한 접근이 통제되어야 하며 이 작업은 프로그래머에게 많은 노력을 요구하고 비용 또한 발생한다. 단일 스레드 모델에서는 이러한 작업이 필요 없다.
+   
+    - 문맥 교환(context switch) 작업을 요구하지 않는다. 문맥 교환은 여러 개의 프로세스가 하나의 프로세서를 공유할 때 발생하는 작업으로 많은 비용을 필요로 한다.
 
 - Event-Based Asynchronous Pattern
- - ![Processing model](https://cloud.githubusercontent.com/assets/7614353/20128535/fdc2d6bc-a68b-11e6-95c2-2e9ae0ff80da.png)
+ ![Processing model](https://cloud.githubusercontent.com/assets/7614353/20128535/fdc2d6bc-a68b-11e6-95c2-2e9ae0ff80da.png)
  - 비동기 동작의 과정과 결과를 이벤트로 통보하는 형식을 취하고 있다.
  - 비동기 작업이 시작되면 해당 작업의 진행 상황을 이벤트로 외부에 전달하는 기능을 포함하고 있으며, 해당 작업이 종료되면 마찬가지로 작업 종료 이벤트를 발생시키는 기능을 포함하고 있다.
 - Ref: [Node.js - 노드 : 특징](http://posnopi13.tistory.com/28)
@@ -77,6 +84,7 @@
  - REST API 서버, Push 서버등에 사용해야 할 것 같음
 
 - Ref: [node.js 의 장점과 단점](http://118k.tistory.com/197)
+
 
 
 #### Node.js Single Thread 처리 방식, 장점, 어떤 경우에 안좋고 어떨때 좋은지
@@ -313,3 +321,11 @@ int main()
 - Stack 영역
    - 함수 호출 시 생성되는 지역 변수와 매개 변수가 저장되는 영역
    - 함수 호출이 완료되면 사라짐
+   
+   
+---
+## Web
+- SPA(Single Page Application)
+ - 단일 페이지 어플리케이션은 브라우저에 로드되고 난 뒤에 페이지 전체를 서버에 요청하는것이 아니라 최초한번 페이지전체를 로딩한후 이후부턴 데이터만 변경해서 사용할 수 있는 웹 어플리케이션을 말한다. 개발자들은 단일 페이지 어플리케이션을 만들기 위해 Backbone.js,Angular.js 등의 자바스크립트 라이브러리를 사용한다.
+ - SPA의 Single Page라는 의미는 최초에 index.html 을 서버로부터 받은 후 부분적인 화면의 변경을 위하여 일부 HTML(Partial HTML)만을 받아 index.html의 특정 영역의 DOM 객체 변경을 통해 View를 바꿔준다. 이후 서버로 부터 받는 것은 View의 컨텐츠 데이터인 JSON 이나 XML 데이터이다. 이렇게 화면의 부분 변경을 위하여 클라이언트단에서 움직이는 Routing 기능을 제공한다. 이를 위하여 클라이언트 템플릿 엔진이 자체 내장되어 있다.
+ - ref: [SPA(SINGLE PAGE APPLICATION) 이란?](http://devsh.tistory.com/entry/SPASingle-Page-Application-%EC%9D%B4%EB%9E%80)
