@@ -31,6 +31,53 @@
 
 #### Method Chaining이란, 어떻게 구현할지
 
+### Node.js
+- Chrome Javascript Engine V8 기반의 플랫폼
+ - V8은 Google에 의해서 C++로 개발된 오픈 소스 자바스크립트 엔진
+ - JavaScript를 compile하여 native machine code 변경 후 runtime시 다시 최적화하여 실행하는 구조.
+ - Garbage Collection을 통한 메모리의 효율적인 관리. ( memory leak는 개선의 여지가 있음 )
+ - Standalone 고성능 JavaScript 엔진으로 사용가능. 
+
+- Single Thread 기반의 Non-Blocking I/O model 사용
+ - 노드를 사용하는 가장 중요한 이유중 하나는 비동기형 방식이다.
+ - 우선 Multi thread이란?
+  - ![Multi-thread](https://cloud.githubusercontent.com/assets/7614353/20128452/78c51038-a68b-11e6-8b26-3ff418da0bf2.png)
+  - 동시에 Service할 수 있는 Client의 수는 Thread Pool안에 있는 가용한 Thread의 수와 동일
+  - 일반적으로 Thread Pool안의 Thread는 500~2000. ( 2000을 넘는 경우는 거의 없다. )
+  - 할당된 Thread가 IO작업( Network, File, DB )을 하게 되면 blocking 방식으로 처리되어 해당 Thread가 CPU를 사용하지 않는 상태(wait 상태)로 변환.
+  - 즉, IO시간만큼 Thread는 blocking.
+
+- Node.js 는 Single Thread로 구성되어 있다. 내부적으로는 Thread Pool 로 구성되어 있다.
+ - ![Non-Blocking I/O Model](https://cloud.githubusercontent.com/assets/7614353/20128262/3c0656c6-a68a-11e6-91d9-d11ad67cafb8.png)
+
+- Event-Based Asynchronous Pattern
+ - ![Processing model](https://cloud.githubusercontent.com/assets/7614353/20128535/fdc2d6bc-a68b-11e6-95c2-2e9ae0ff80da.png)
+ - 비동기 동작의 과정과 결과를 이벤트로 통보하는 형식을 취하고 있다.
+ - 비동기 작업이 시작되면 해당 작업의 진행 상황을 이벤트로 외부에 전달하는 기능을 포함하고 있으며, 해당 작업이 종료되면 마찬가지로 작업 종료 이벤트를 발생시키는 기능을 포함하고 있다.
+- Ref: [Node.js - 노드 : 특징](http://posnopi13.tistory.com/28)
+
+#### Node.js 특징
+
+- 장점
+ - 싱글스레드, 비동기 IO 처리에 기반한 빠른 속도(내부적으로는 Thread Pool 로 구성되어 있다.)
+ - 파일 I/O나 네트워크 처리를 이벤트 드리븐 방식으로 처리하기 때문에 빠른 처리가 가능함
+ - CPU의 대기시간을 최소화 할 수 있음
+ - CPU 부하가 적고, 많은 커넥션을 동시에 처리해야 하는 구조에 적합
+ - 자바스크립트를 이용해서 개발할 수 있기 때문에 프론트엔드 개발자의 진입장벽이 낮음
+ - 기존 Java 서버에 비해 생산성이 높음
+
+- 단점
+ - 싱글스레드 모델이기 때문에 하나의 작업에 시간이 오래걸리면 시스템 전체의 성능이 급격하게 떨어짐
+ - 이벤트 콜백 중심으로 코드가 중첩될 경우 가독성이 떨어짐
+ - 에러가 발생할 경우 프로세스 자체가 죽어버리므로 주의해야 함(watch dog 등으로 처리 가능)
+ - 멀티코어 활용을 위해서 cluster 모듈을 이용해야 하고, 세션을 공유할 경우 부가적인 작업이 필요함
+
+- 종합
+ - 개발이 빠르고 쉬운 장점이 있지만 운영 과정의 어려움이 존재함
+ - REST API 서버, Push 서버등에 사용해야 할 것 같음
+
+- Ref: [node.js 의 장점과 단점](http://118k.tistory.com/197)
+
 
 #### Node.js Single Thread 처리 방식, 장점, 어떤 경우에 안좋고 어떨때 좋은지
 
