@@ -6,7 +6,7 @@ using namespace std;
 int kadane(vector<int>& data)
 {
   int sum_of_subarray = data[0];
-  int max_end = v[0];
+  int max_end = data[0];
   int begin_temp = 0;
   int begin = 0, end = 0;
   
@@ -15,7 +15,7 @@ int kadane(vector<int>& data)
       max_end = data[i];
       begin_temp = i;
     } else {
-      max_end += v[i];
+      max_end += data[i];
     }
     
     if (max_end >= sum_of_subarray) {
@@ -29,7 +29,16 @@ int kadane(vector<int>& data)
 
 int main()
 {
-  vector<int> data = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
+  vector<int> data(9);
+  data.push_back(-2);
+  data.push_back(1);
+  data.push_back(-3);
+  data.push_back(4);
+  data.push_back(-1);
+  data.push_back(2);
+  data.push_back(1);
+  data.push_back(-5);
+  data.push_back(4);
   cout << "resut = " << kadane(data) << endl;
 
   return 0;
