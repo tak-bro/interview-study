@@ -11,6 +11,7 @@
 - [Network](#network)
 - [Operating System](#operating-system)
 - [Web](#web)
+- [iOS](#ios)
 
 ---
 
@@ -21,7 +22,29 @@
 
 ## Data Structure
 
+### Hash란 무엇인가?
+- 해시 테이블(hash table), 해시 맵(hash map), 해시 표는 컴퓨팅에서 키를 값에 매핑할 수 있는 구조인, 연관 배열 추가에 사용되는 자료 구조이다. 해시 테이블은 해시 함수를 사용하여 색인(index)을 버킷(bucket)이나 슬롯(slot)의 배열로 계산한다.
+- ref: [https://ko.wikipedia.org/wiki/해시_테이블](https://ko.wikipedia.org/wiki/해시_테이블)
 
+
+### Set, Array, Map을 설명하시오.
+- List
+ - 객체들이 들오온 순서대로 참조를 유지하기 위한 목적. 수집의 순서가 있으며, 동일한 데이터의 중복 입력이 가능. 순차적으로 대량의 데이터를 억세스하거나 입력할 때 유리한 방식.
+- Map
+ - Key & Value의 형태로 입력이 되며, 키 값을 입력하면 해당하는 value 값을 획득. 수집의 순서를 기억하지 않으며, 동일한 데이터를 Key값으로 사용할 수 없다. (물론 key값이 틀리고 value값이 동일한 건 가능.)다수의 데이터에서 원하는 특정 데이터에 접근할 때 유리한 방식.
+- Set
+ - 중복데이터를 불허하는 것을 제외하고는 큰 특징이 없습니다. 입력되는 당시의 순서에는 따르지 않으나... 순차적인 접근을 위해서는 Iterator로 접근하게 됩니다.
+ 
+### Indexing의 장점과 단점은 무엇인가?
+- 장점
+ - 검색 속도가 무척 빨라질 수 있다. (반드시 그런것은 아니지만)
+ - 그 결과 시스템의 부하가 줄어들어 시스템 전체 성능 향상에 도움이 된다.
+- 단점
+ - 인덱스가 데이터베이스 공간을 차지해 추가적인 공간이 필요해진다. (DB의 10퍼센트 내외의 공간이 추가로 필요)
+ - 인덱스를 생성하는데 시간이 많이 소요될 수 있다.
+ - 데이터 변경 작업이 자주 일어날 경우에 인덱스를 재작성해야 할 필요가 있기에 성능에 영향을 끼칠 수 있다.
+ 
+ 
 ---
 
 ## Programming Language
@@ -257,6 +280,8 @@ int main()
 
 - Ref: [NoSQL – MongoDB를 RDBMS의 대안으로 고민 중이라면 참고할 만한 글](hochul.net/blog/nosql_mongodb_rdbms_alternative)
 
+
+ 
 ---
 
 ## Network
@@ -272,10 +297,19 @@ int main()
     - TCP와 같이 UDP도 헤더에 있는 Checksum 필드를 통해 최소한의 오류는 검출한다.
 - Ref: [http://swalloow.tistory.com/77](http://swalloow.tistory.com/77)
 
+#### 메신저 앱에서 TCP와 UDP는 어떤 경우에 사용될까?
+- Ref: **[http://mintnlatte.tistory.com/307](http://mintnlatte.tistory.com/307)**
+
 ### TCP/IP 
 - Server: socket() -> bind() -> listen() -> accept() -> read()/write() -> close()
 - &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑
 - Client: socket() ----------------------> connect() -> read()/write() -> close()
+
+### 암호화의 3가지 종류를 설명하라.(by tutor)
+- 대칭키 암호 시스템
+- 공개키 암호 시스템
+- ref: [https://ko.wikipedia.org/wiki/암호학](https://ko.wikipedia.org/wiki/암호학)
+- ref: [https://ko.wikipedia.org/wiki/정보_보안](https://ko.wikipedia.org/wiki/정보_보안)
 
 
 ---
@@ -288,6 +322,11 @@ int main()
 - Thread
     - 한 Process에서 동작되는 실행의 단위이다. 프로세스가 생성될 때 기본적으로 하나의 쓰레드가 생성되며 이를 메인 쓰레드라고 한다. 프로세스는 여러 개의 쓰레드를 가질 수 있으며, 각 쓰레드마다 별도의 스택이 있다.
     - 각 쓰레드는 같은 프로세스에 있는 다른 쓰레드와 독립적으로 돌아가지만, 기본적으로 쓰레드끼리는 파일 핸들이나 메모리 같은 자원들을 공유한다. 때문에 공유 자원에 대한 접근 처리를 제대로 하지않으면 데드락 같은 문제가 생길 수 있다.
+
+#### Thread와 Process의 차이점은 무엇인가? (by Tutor)
+ - Process : 프로그램 각각의 인스턴스를 의미. 멀티 프로세싱 OS에서는 동시에 여러 프로그램을 실행할 수 있다.
+ - Thread : 한 프로세스 내에서 동작되는 여러 실행의 흐름. 프로세스 내의 주소 공간이나 자원들을 대부분 공유하면서 실행된다.
+ - Ref: [http://ralf79.tistory.com/34](http://ralf79.tistory.com/34)
 
 ### Multi Process, Multi Thread
 - 두 개의 프로세스는 완전히 독립된 두 개의 프로그램 실행을 위해서 사용되기 때문에 Context Switching으로 인한 성능 저하가 발생한다.
@@ -324,10 +363,65 @@ int main()
    - 함수 호출 시 생성되는 지역 변수와 매개 변수가 저장되는 영역
    - 함수 호출이 완료되면 사라짐
    
-   
+ 
 ---
 ## Web
 - SPA(Single Page Application)
  - 단일 페이지 어플리케이션은 브라우저에 로드되고 난 뒤에 페이지 전체를 서버에 요청하는것이 아니라 최초한번 페이지전체를 로딩한후 이후부턴 데이터만 변경해서 사용할 수 있는 웹 어플리케이션을 말한다. 개발자들은 단일 페이지 어플리케이션을 만들기 위해 Backbone.js,Angular.js 등의 자바스크립트 라이브러리를 사용한다.
  - SPA의 Single Page라는 의미는 최초에 index.html 을 서버로부터 받은 후 부분적인 화면의 변경을 위하여 일부 HTML(Partial HTML)만을 받아 index.html의 특정 영역의 DOM 객체 변경을 통해 View를 바꿔준다. 이후 서버로 부터 받는 것은 View의 컨텐츠 데이터인 JSON 이나 XML 데이터이다. 이렇게 화면의 부분 변경을 위하여 클라이언트단에서 움직이는 Routing 기능을 제공한다. 이를 위하여 클라이언트 템플릿 엔진이 자체 내장되어 있다.
  - ref: [SPA(SINGLE PAGE APPLICATION) 이란?](http://devsh.tistory.com/entry/SPASingle-Page-Application-%EC%9D%B4%EB%9E%80)
+ 
+ 
+---
+
+## iOS
+
+### Todo
+- collection의  개념 설명하라 : list, hash, set
+- mutable, in-mutable 차이를 설명하라
+- GCD를 설명하라
+- delegate / notification 각각 무엇이고 언제 써야하는지 설명하라
+- ARC / Non-ARC의 차이는 무엇인가?
+- UIViewController의 lifecycle 설명하라
+- isKindOfClass / isMemberOfClass 의 차이를 설명하라
+- OpenSource를 활용해보았는가?
+- IB, StoryBoard를 어떻게 이용해보았는가?
+- Memory Leak을 줄이기 위해서 어떤 방법들을 사용해보았는가?
+- 네트워크 프로그래밍에서 중간에 다운로드가 중단된다면 어떻게 처리할 것인가?
+- GCD(Grand Central Dispatch)를 사용해보았는가?
+- CocoaPods를 써보았는가?
+- 최신 iOS 개발기술 정보는 어디서 얻는가?
+- 최근에 본 애플의 iOS 기술문서는 무엇인가?
+- Swift언어에 대해 어떻게 생각하는가?
+
+### Mutable 객체와 Mutable하지 않은 객체의 차이는 무엇인가?
+- mutable 객체는 객채 내의 특정 요소를 변경 할 수 있는 객체를 mutable 객체라고 한다.
+
+### NSArray와 NSMutableArray 중에서 Thread safe하지 않는 쪽은 어디인가?
+- NSMutableArray는 스레드로부터 안전하지 않습니다. 경우 사람에 스레드 안전한 환경에서 removeAllObject 이상을 달성하고자, 나는 잠금 장치를 사용하여 하나 이외의 GCD를 사용하여 다른 솔루션을 제공 할 것입니다. 당신이해야 할 것은 행동 (/ 제거를 대체) 읽기 / 업데이트를 동기화하는 것입니다.
+
+### Autorelease Pool을 직접 구현한다면 어떻게 만들겠나?
+- [http://www.clien.net/cs2/bbs/board.php?bo_table=cm_app&wr_id=466](http://www.clien.net/cs2/bbs/board.php?bo_table=cm_app&wr_id=466)
+- [http://www.programkr.com/blog/MgTM3ADMwYTz.html](http://www.programkr.com/blog/MgTM3ADMwYTz.html)
+
+### Blocking I/O와 Non-Blocking I/O의 차이는 무엇인가?
+- [http://devsw.tistory.com/142](http://devsw.tistory.com/142)
+
+### Memory Warning이 발생하면 어떤 일이 일어날까?
+- [https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/PerformanceTips/PerformanceTips.html](https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/PerformanceTips/PerformanceTips.html)
+- [https://soulpark.wordpress.com/2013/07/25/ios-arc-from-top-developer/](https://soulpark.wordpress.com/2013/07/25/ios-arc-from-top-developer/)
+- iOS 디바이스가 low-memory warning을 받으면 view가 unload되는데 이때 weak으로 처리해야 IBOutlet에 연결된 view도 자동으로 해제된다. 
+
+### Static Library와 Dynamic Library를 설명하시오.
+- [http://tadis.tistory.com/54](http://tadis.tistory.com/54)
+
+### 파일을 (앱의 Sandbox 안에) 안전하게 저장하는 방법은?
+### Sandbox안의 Document, Cache, Temp 폴더의 차이를 설명하시오.
+- App 폴더 : 어플리케이션의 홈 디렉토리
+- MyApp.app : bundle 이라고 하며 앱 실행을 위한 파일들이 위치한다. Xcode 를 통해 템플릿 프로젝트를 만들때 자동으로 생성되는 기본 아이콘 이미지들은 이 곳에 위치한다. 개발 중 추가되는 파일(이미지, 텍스트 파일 등)도 이곳에 위치한다. 앱 실행 중 폴더의 내용 변경 및 쓰기는 하지 말자.
+- Documents : 사용자 정보를 저장한다. 이 곳의 데이터는 iTunes 에 의해 백업된다. Xcode 를 이용하여 이 곳에 파일을 추가할 수 없다. Runtime 에서만 접근 가능하다.
+- Library : 사용자 정보를 제외한, 백업을 필요로 하는 데이터를 저장하는데 사용한다. Runtime 에서 접근 가능하다.
+- tmp : 임시 파일을 위한 저장소이다. 개발자는 필요 없어진 파일을 삭제해야 한다. iOS 시스템은 앱이 실행 상태가 아닐 때 폴더내 파일을 삭제할 수 있다. Runtime 에서 접근 가능하다.
+- ref: [https://soulpark.wordpress.com/2012/09/24/ios-file-system/](https://soulpark.wordpress.com/2012/09/24/ios-file-system/)
+
+
