@@ -43,7 +43,12 @@
  - 인덱스가 데이터베이스 공간을 차지해 추가적인 공간이 필요해진다. (DB의 10퍼센트 내외의 공간이 추가로 필요)
  - 인덱스를 생성하는데 시간이 많이 소요될 수 있다.
  - 데이터 변경 작업이 자주 일어날 경우에 인덱스를 재작성해야 할 필요가 있기에 성능에 영향을 끼칠 수 있다.
- 
+
+### Tree에서의 Pre-Order, In-order, Post-order 사용
+- Pre-order: Used to create a copy of tree 
+> Example: If you want to create a replica of a tree and need node values in an array and when you insert those values from index 0 to end in a new tree, you get a replica
+- In-order: To get values of node in non-increasing order(Array로 소팅된다.)
+- Post-order: When you want to delete a tree from leaf to root(ex. 메모리 해제시 댕글링 포인터 방지 위해 뒤에서부터 해제할 때)
  
 ---
 
