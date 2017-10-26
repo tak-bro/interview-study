@@ -12,6 +12,7 @@
 - [Operating System](#operating-system)
 - [Web](#web)
 - [iOS](#ios)
+- [etc](#etc)
 
 ---
 
@@ -464,4 +465,15 @@ int main()
 - tmp : 임시 파일을 위한 저장소이다. 개발자는 필요 없어진 파일을 삭제해야 한다. iOS 시스템은 앱이 실행 상태가 아닐 때 폴더내 파일을 삭제할 수 있다. Runtime 에서 접근 가능하다.
 - ref: [https://soulpark.wordpress.com/2012/09/24/ios-file-system/](https://soulpark.wordpress.com/2012/09/24/ios-file-system/)
 
+-----
+
+## etc
+- 전 직장에서 가장 많이 배운것?
+- 전 직장에서 무엇을 중시했나
+- 전 직장에서 모자랐던 부분과 잘했던 부분?
+- 직장 외에 새로 공부하는 것 or 빠져있는 것?
+- 전 직장에서 퇴사하는 이유?
+- 본인이 회사에서 가장 중요시 여기는 것?
+- 본인이 수행했던 프로젝트에 대한 설명
+- 전 직장에서 뭐했나?
 
